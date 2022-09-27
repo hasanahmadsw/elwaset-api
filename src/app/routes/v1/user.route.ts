@@ -11,6 +11,6 @@ const router = Router();
 
 router.post("/register", validator.body(register), userHandler.registerUser);
 router.post("/login", validator.body(login), userHandler.loginUser);
-router.get("/:id", userHandler.findOneById);
+// router.get("/:id", userHandler.findOneById);
 
 export default router;

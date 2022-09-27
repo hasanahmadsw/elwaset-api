@@ -31,8 +31,10 @@ jobs:
           DATABASE_USER: ${{ secrets.DATABASE_USER }}
           DATABASE_PASS: ${{ secrets.DATABASE_PASS }}
         run: yarn add
-          sudo service mysql start
-          mysql --host 127.0.0.1 --port ${{ job.services.mysql.ports['3306'] }} -u${{ secrets.DATABASE_USER }} -p${{ secrets.DATABASE_PASS }} < etc/original.sql
-          mysql --host 127.0.0.1 --port ${{ job.services.mysql.ports['3306'] }} -u${{ secrets.DATABASE_USER }} -p${{ secrets.DATABASE_PASS }} -e "SHOW DATABASES"
+          # sudo service mysql start
+          sudo /etc/init.d/mysql start
           mysql -e 'CREATE DATABASE ${{ env.DATABASE_NAME }};' -u${{ env.DATABASE_USER }} -p${{ env.DATABASE_PASS }}
+          # mysql --host 127.0.0.1 --port ${{ job.services.mysql.ports['3306'] }} -u${{ secrets.DATABASE_USER }} -p${{ secrets.DATABASE_PASS }} < etc/original.sql
+          # mysql --host 127.0.0.1 --port ${{ job.services.mysql.ports['3306'] }} -u${{ secrets.DATABASE_USER }} -p${{ secrets.DATABASE_PASS }} -e "SHOW DATABASES"
+          # mysql -e 'CREATE DATABASE ${{ env.DATABASE_NAME }};' -u${{ env.DATABASE_USER }} -p${{ env.DATABASE_PASS }}
           yarn start:prod

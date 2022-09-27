@@ -30,7 +30,8 @@ jobs:
           DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
           DATABASE_USER: ${{ secrets.DATABASE_USER }}
           DATABASE_PASS: ${{ secrets.DATABASE_PASS }}
-        run: sudo yarn
+        run: 
+          yarn
           sudo service mysql start
           mysql -e 'CREATE DATABASE ${{ env.DATABASE_NAME }};' -u${{ env.DATABASE_USER }} -p${{ env.DATABASE_PASS }}
           yarn start:prod
